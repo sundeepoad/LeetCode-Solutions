@@ -1,19 +1,20 @@
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
+    def maxArea(self, heights: List[int]) -> int:
         
-        ## dictionary for occurence.
-        ## keep removing t elements
-        lst_s = list(s)
-        lst_t = list(t)
+        final = []
+  
+        p1 = 0
+        p2 = len(heights) -1
 
-        if len(lst_s) != len(lst_t):
-            return False
+        while p1 < p2:
 
-        for i in lst_t:
-            if i in lst_s:
-                lst_s.remove(i)
-        print(lst_s)
-        if len(lst_s) == 0:
-            return True
-        else:
-            return False
+            area = (p2 - p1) * min(heights[p1],heights[p2])
+            final.append(area)
+
+            if heights[p1] < heights[p2]:
+                p1+=1
+            
+            else:
+                p2-=1
+
+        return max(final)
