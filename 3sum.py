@@ -1,20 +1,29 @@
-class Solution:
-    def maxArea(self, heights: List[int]) -> int:
-        
-        final = []
-  
-        p1 = 0
-        p2 = len(heights) -1
+nums = [-1,0,1,2,-1,-4]
+nums1=[0,1,1]
 
-        while p1 < p2:
+def threeSum(nums):
 
-            area = (p2 - p1) * min(heights[p1],heights[p2])
-            final.append(area)
-
-            if heights[p1] < heights[p2]:
-                p1+=1
             
-            else:
-                p2-=1
+    p1 = 0
+    p2 = 1
 
-        return max(final)
+    while p1 < len(nums):
+        p2 = p1 + 1
+
+        while p2 < len(nums):
+            p3 = p2+ 1
+
+            while p3 < len(nums):
+
+                if nums[p1] + nums[p2] + nums[p3] == 0:
+                    
+                    return [nums[p1],nums[p2], nums[p3]]
+                    
+                else:
+                    p3 +=1
+                
+            p2 +=1
+            
+        p1 +=1              
+
+print(threeSum(nums1))
