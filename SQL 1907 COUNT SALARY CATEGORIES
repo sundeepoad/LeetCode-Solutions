@@ -1,0 +1,28 @@
+SQL 1907 COUNT SALARY CATEGORIES
+
+# Write your MySQL query statement below
+
+WITH cte as(
+select
+case when income < 20000 then "Low Salary"
+when income > 50000 then "High Salary" 
+when income >= 20000 and income <= 50000 then "Average Salary" else 0 end as category, Count(account_id) as accounts_count
+from Accounts
+group by category),
+
+cte1 as(
+
+select 'Low Salary' as category
+union all
+select 'Average Salary' 
+union all
+select 'High Salary'
+)
+
+
+select b.category as category, COALESCE(a.accounts_count,0) as accounts_count
+from cte1 b
+left join cte a
+on a.category = b.category
+
+
