@@ -1,0 +1,24 @@
+SQL 602 Friend Requests who has the most friends
+
+
+
+
+# Write your MySQL query statement below
+
+with cte as(
+select requester_id,count(accepter_id) as id
+from RequestAccepted
+group by requester_id
+
+union all
+
+select accepter_id,count(requester_id) as id
+from RequestAccepted
+group by accepter_id
+)
+
+
+select requester_id as id, (sum(id)) as num from cte
+group by requester_id
+order by num desc
+limit 1
