@@ -1,0 +1,16 @@
+619. Biggest Single Number
+
+# Write your MySQL query statement below
+
+with res as (
+select max(n1.num) as num, Count(n2.num) from MyNumbers n1
+join MyNumbers n2
+on n2.num = n1.num
+group by n1.num
+having Count(n2.num) = 1
+order by n1.num desc
+limit 1
+)
+
+select Coalesce((select num from res),NULL) as num
+
