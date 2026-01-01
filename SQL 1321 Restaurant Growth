@@ -1,0 +1,26 @@
+SQL 1341 Movie Rating
+
+# Write your MySQL query statement below
+
+select results from (
+(
+select u.name as results
+from Users u
+join MovieRating mr
+on mr.user_id = u.user_id
+group by u.user_id, u.name
+order by Count(mr.rating) desc, u.name
+limit 1)
+
+union all
+
+(
+select m.title
+from Movies m
+join MovieRating mr
+on mr.movie_id = m.movie_id
+where mr.created_at between '2020-02-01' AND '2020-02-29'
+GROUP BY m.movie_id, m.title
+  ORDER BY AVG(mr.rating) DESC, m.title
+  LIMIT 1
+)) as c
