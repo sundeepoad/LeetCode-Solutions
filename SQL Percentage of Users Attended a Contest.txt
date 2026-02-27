@@ -1,0 +1,8 @@
+1633. Percentage of Users Attended a Contest
+
+select contest_id, Round(Count(Distinct r.user_id) * 100 / (Select count(*) from users),2) as percentage
+from Users u
+Join Register r
+on u.user_id = r.user_id
+group by contest_id
+order by percentage desc, r.contest_id asc
