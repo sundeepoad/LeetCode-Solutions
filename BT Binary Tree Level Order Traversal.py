@@ -14,6 +14,7 @@ class Solution:
             return []
         
         queue = deque([root])
+                      
         
         while queue:
             level = []
